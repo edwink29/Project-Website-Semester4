@@ -12,15 +12,15 @@
   <!-- Bootstrap Icons CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
-</head>
 <body>
-  <div class="flex h-screen">
+  <div x-data="{isSideMenuOpen: false}" @resize.window="if (window.innerWidth >= 1280) isSideMenuOpen = false" class="flex h-screen">
     <x-sidebar></x-sidebar>
 
     <div class="xl:ml-64 ease-in-out duration-200 flex flex-col flex-1">
         <x-navbar></x-navbar>
 
-        <main class="flex-1 p-6 bg-gray-100">
+        <main class="relative flex-1 mt-16 xl:mt-0 p-6 bg-gray-100">
+          <div x-bind:class="isSideMenuOpen ? 'opacity-70' : 'opacity-0'" class="absolute top-0 left-0 w-full h-full bg-gray-600 pointer-events-none"></div>
           <div>
             <h1 class="font-bold text-gray-600 text-2xl">{{ $title }}</h1>
             {{ $slot }}
@@ -28,10 +28,6 @@
         </main>
     </div>
 </div>
-
-
-  <main>
-
-  </main>
+{{-- <script src="{{ asset('js/init-alpine.js') }}"></script> --}}
 </body>
 </html>
